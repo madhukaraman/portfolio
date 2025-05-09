@@ -1,0 +1,20 @@
+name: Analyze Dependencies
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  analyze-dependencies:
+    runs-on: ubuntu-latest
+    container:
+      image: madhukaraman/dependency-generator-core:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Analyze dependencies
+        run: node src/index.js --dir $GITHUB_WORKSPACE --send
