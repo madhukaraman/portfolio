@@ -14,10 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List file tree of the workspace
+        run: |
+          echo "Listing the file tree of the workspace:"
+          ls -R ${{ github.workspace }}
+
       - name: Analyze dependencies
         uses: addnab/docker-run-action@v3
         with:
           image: madhukaraman/dependency-generator-core:latest
-          options: -v ${{ github.workspace }}  # Mount to /app instead of /workspace
+          options: -v ${{ github.workspace }}:/app  # Mount to /app instead of /workspace
           run: |
             node src/index.js --dir /repo --output /output/dependency-graph.json --send
