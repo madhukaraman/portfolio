@@ -23,6 +23,8 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: madhukaraman/dependency-generator-core:latest
-          options: -v ${{ github.workspace }}:/app  # Mount to /app instead of /workspace
+          options: -v ${{ github.workspace }}:/app  # Correct mount to /app
           run: |
+            echo "Listing files in /app to verify mount:"
+            ls -R /app  # List files inside the container after mount
             node src/index.js --dir /repo --output /output/dependency-graph.json --send
