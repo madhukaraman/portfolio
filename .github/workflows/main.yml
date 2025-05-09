@@ -10,7 +10,7 @@ on:
 jobs:
   analyze-dependencies:
     runs-on: ubuntu-latest
-    container: dependency-generator-core:latest
+    container: madhukaraman/dependency-generator-core:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
